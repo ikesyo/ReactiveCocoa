@@ -16,7 +16,7 @@
 // Contains all current subscribers to the receiver.
 //
 // This should only be used while synchronized on `self`.
-@property (nonatomic, strong, readonly) NSMutableArray *subscribers;
+@property (nonatomic, strong, readonly) NSMutableArray<id<RACSubscriber>> *subscribers;
 
 // Contains all of the receiver's subscriptions to other signals.
 @property (nonatomic, strong, readonly) RACCompoundDisposable *disposable;
@@ -76,7 +76,7 @@
 }
 
 - (void)enumerateSubscribersUsingBlock:(void (^)(id<RACSubscriber> subscriber))block {
-	NSArray *subscribers;
+	NSArray<id<RACSubscriber>> *subscribers;
 	@synchronized (self.subscribers) {
 		subscribers = [self.subscribers copy];
 	}

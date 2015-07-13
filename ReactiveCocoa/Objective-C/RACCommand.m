@@ -38,7 +38,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 // began.
 //
 // This property is KVO-compliant.
-@property (atomic, copy, readonly) NSArray *activeExecutionSignals;
+@property (atomic, copy, readonly) NSArray<RACSignal *> *activeExecutionSignals;
 
 // `enabled`, but without a hop to the main thread.
 //
@@ -77,7 +77,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 	[self didChangeValueForKey:@keypath(self.allowsConcurrentExecution)];
 }
 
-- (NSArray *)activeExecutionSignals {
+- (NSArray<RACSignal *> *)activeExecutionSignals {
 	@synchronized (self) {
 		return [_activeExecutionSignals copy];
 	}
@@ -139,7 +139,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 	RACSignal *newActiveExecutionSignals = [[[[[self
 		rac_valuesAndChangesForKeyPath:@keypath(self.activeExecutionSignals) options:NSKeyValueObservingOptionNew observer:nil]
 		reduceEach:^(id _, NSDictionary *change) {
-			NSArray *signals = change[NSKeyValueChangeNewKey];
+			NSArray<RACSignal *> *signals = change[NSKeyValueChangeNewKey];
 			if (signals == nil) return [RACSignal empty];
 
 			return [signals.rac_sequence signalWithScheduler:RACScheduler.immediateScheduler];
@@ -174,7 +174,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 	_errors = [errorsConnection.signal setNameWithFormat:@"%@ -errors", self];
 	[errorsConnection connect];
 
-	RACSignal *immediateExecuting = [RACObserve(self, activeExecutionSignals) map:^(NSArray *activeSignals) {
+	RACSignal *immediateExecuting = [RACObserve(self, activeExecutionSignals) map:^(NSArray<RACSignal *> *activeSignals) {
 		return @(activeSignals.count > 0);
 	}];
 

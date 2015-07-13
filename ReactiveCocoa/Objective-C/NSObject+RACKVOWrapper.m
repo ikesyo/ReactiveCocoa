@@ -26,7 +26,7 @@
 
 	NSObject *strongObserver = weakObserver;
 
-	NSArray *keyPathComponents = keyPath.rac_keyPathComponents;
+	NSArray<NSString *> *keyPathComponents = keyPath.rac_keyPathComponents;
 	BOOL keyPathHasOneComponent = (keyPathComponents.count == 1);
 	NSString *keyPathHead = keyPathComponents[0];
 	NSString *keyPathTail = keyPath.rac_keyPathByDeletingFirstKeyPathComponent;

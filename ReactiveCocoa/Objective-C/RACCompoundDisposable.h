@@ -22,7 +22,7 @@
 
 /// Creates and returns a new compound disposable containing the given
 /// disposables.
-+ (instancetype)compoundDisposableWithDisposables:(NSArray *)disposables;
++ (instancetype)compoundDisposableWithDisposables:(NSArray<RACDisposable *> *)disposables;
 
 /// Adds the given disposable. If the receiving disposable has already been
 /// disposed of, the given disposable is disposed immediately.

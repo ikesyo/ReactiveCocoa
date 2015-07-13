@@ -74,11 +74,11 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 	return [[self alloc] initWithDisposables:nil];
 }
 
-+ (instancetype)compoundDisposableWithDisposables:(NSArray *)disposables {
++ (instancetype)compoundDisposableWithDisposables:(NSArray<RACDisposable *> *)disposables {
 	return [[self alloc] initWithDisposables:disposables];
 }
 
-- (id)initWithDisposables:(NSArray *)otherDisposables {
+- (id)initWithDisposables:(NSArray<RACDisposable *> *)otherDisposables {
 	self = [self init];
 	if (self == nil) return nil;
 

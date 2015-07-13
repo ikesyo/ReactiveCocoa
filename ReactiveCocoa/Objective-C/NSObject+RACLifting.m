@@ -41,7 +41,7 @@
 		setNameWithFormat:@"%@ -rac_liftSelector: %s withSignalsOfArguments: %@", RACDescription(self), sel_getName(selector), arguments];
 }
 
-- (RACSignal *)rac_liftSelector:(SEL)selector withSignalsFromArray:(NSArray *)signals {
+- (RACSignal *)rac_liftSelector:(SEL)selector withSignalsFromArray:(NSArray<RACSignal *> *)signals {
 	NSCParameterAssert(signals != nil);
 	NSCParameterAssert(signals.count > 0);
 

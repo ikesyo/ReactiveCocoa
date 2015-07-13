@@ -106,7 +106,7 @@ static NSString * const RACKVOChannelDataDictionaryKey = @"RACKVOChannelKey";
 	}];
 
 	NSString *keyPathByDeletingLastKeyPathComponent = keyPath.rac_keyPathByDeletingLastKeyPathComponent;
-	NSArray *keyPathComponents = keyPath.rac_keyPathComponents;
+	NSArray<NSString *> *keyPathComponents = keyPath.rac_keyPathComponents;
 	NSUInteger keyPathComponentsCount = keyPathComponents.count;
 	NSString *lastKeyPathComponent = keyPathComponents.lastObject;
 

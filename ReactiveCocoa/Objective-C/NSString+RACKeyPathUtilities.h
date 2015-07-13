@@ -15,7 +15,7 @@
 //
 // Calling this method on a string that isn't a key path is considered undefined
 // behavior.
-- (NSArray *)rac_keyPathComponents;
+- (NSArray<NSString *> *)rac_keyPathComponents;
 
 // Returns a key path with all the components of the receiver except for the
 // last one.

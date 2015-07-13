@@ -10,7 +10,7 @@
 
 @implementation NSString (RACKeyPathUtilities)
 
-- (NSArray *)rac_keyPathComponents {
+- (NSArray<NSString *> *)rac_keyPathComponents {
 	if (self.length == 0) {
 		return nil;
 	}

@@ -489,7 +489,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// the signals in `cases` or `defaultSignal`, and sends `completed` when both
 /// `signal` and the last used signal complete. If no `defaultSignal` is given,
 /// an unmatched `next` will result in an error on the returned signal.
-+ (RACSignal *)switch:(RACSignal *)signal cases:(NSDictionary *)cases default:(RACSignal *)defaultSignal;
++ (RACSignal *)switch:(RACSignal *)signal cases:(NSDictionary<id, RACSignal *> *)cases default:(RACSignal *)defaultSignal;
 
 /// Switches between `trueSignal` and `falseSignal` based on the latest value
 /// sent by `boolSignal`.

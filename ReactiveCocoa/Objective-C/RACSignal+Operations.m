@@ -673,7 +673,7 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 
 	#if DEBUG
 	static void *bindingsKey = &bindingsKey;
-	NSMutableDictionary *bindings;
+	NSMutableDictionary<NSString *, NSValue *> *bindings;
 
 	@synchronized (object) {
 		bindings = objc_getAssociatedObject(object, bindingsKey);
@@ -814,16 +814,11 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 	}] setNameWithFormat:@"[%@] -switchToLatest", self.name];
 }
 
-+ (RACSignal *)switch:(RACSignal *)signal cases:(NSDictionary *)cases default:(RACSignal *)defaultSignal {
++ (RACSignal *)switch:(RACSignal *)signal cases:(NSDictionary<id, RACSignal *> *)cases default:(RACSignal *)defaultSignal {
 	NSCParameterAssert(signal != nil);
 	NSCParameterAssert(cases != nil);
 
-	for (id key in cases) {
-		id value __attribute__((unused)) = cases[key];
-		NSCAssert([value isKindOfClass:RACSignal.class], @"Expected all cases to be RACSignals, %@ isn't", value);
-	}
-
-	NSDictionary *copy = [cases copy];
+	NSDictionary<id, RACSignal *> *copy = [cases copy];
 
 	return [[[signal
 		map:^(id key) {
@@ -1084,7 +1079,7 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 	NSCParameterAssert(keyBlock != NULL);
 
 	return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
-		NSMutableDictionary *groups = [NSMutableDictionary dictionary];
+		NSMutableDictionary<id<NSCopying>, RACGroupedSignal *> *groups = [NSMutableDictionary dictionary];
 		NSMutableArray *orderedGroups = [NSMutableArray array];
 
 		return [self subscribeNext:^(id x) {

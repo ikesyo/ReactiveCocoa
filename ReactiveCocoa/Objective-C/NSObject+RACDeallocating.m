@@ -15,9 +15,9 @@
 
 static const void *RACObjectCompoundDisposable = &RACObjectCompoundDisposable;
 
-static NSMutableSet *swizzledClasses() {
+static NSMutableSet<NSString *> *swizzledClasses() {
 	static dispatch_once_t onceToken;
-	static NSMutableSet *swizzledClasses = nil;
+	static NSMutableSet<NSString *> *swizzledClasses = nil;
 	dispatch_once(&onceToken, ^{
 		swizzledClasses = [[NSMutableSet alloc] init];
 	});

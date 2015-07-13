@@ -58,7 +58,7 @@ static NSString * const RACKVOChannelDataDictionaryKey = @"RACKVOChannelKey";
 #pragma mark Properties
 
 - (RACKVOChannelData *)currentThreadData {
-	NSMutableArray *dataArray = NSThread.currentThread.threadDictionary[RACKVOChannelDataDictionaryKey];
+	NSMutableArray<RACKVOChannelData *> *dataArray = NSThread.currentThread.threadDictionary[RACKVOChannelDataDictionaryKey];
 
 	for (RACKVOChannelData *data in dataArray) {
 		if (data.owner == (__bridge void *)self) return data;
@@ -150,7 +150,7 @@ static NSString * const RACKVOChannelDataDictionaryKey = @"RACKVOChannelKey";
 }
 
 - (void)createCurrentThreadData {
-	NSMutableArray *dataArray = NSThread.currentThread.threadDictionary[RACKVOChannelDataDictionaryKey];
+	NSMutableArray<RACKVOChannelData *> *dataArray = NSThread.currentThread.threadDictionary[RACKVOChannelDataDictionaryKey];
 	if (dataArray == nil) {
 		dataArray = [NSMutableArray array];
 		NSThread.currentThread.threadDictionary[RACKVOChannelDataDictionaryKey] = dataArray;
@@ -166,7 +166,7 @@ static NSString * const RACKVOChannelDataDictionaryKey = @"RACKVOChannelKey";
 }
 
 - (void)destroyCurrentThreadData {
-	NSMutableArray *dataArray = NSThread.currentThread.threadDictionary[RACKVOChannelDataDictionaryKey];
+	NSMutableArray<RACKVOChannelData *> *dataArray = NSThread.currentThread.threadDictionary[RACKVOChannelDataDictionaryKey];
 	NSUInteger index = [dataArray indexOfObjectPassingTest:^ BOOL (RACKVOChannelData *data, NSUInteger idx, BOOL *stop) {
 		return data.owner == (__bridge void *)self;
 	}];

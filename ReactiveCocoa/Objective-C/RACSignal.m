@@ -107,7 +107,7 @@
 	return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
 		RACStreamBindBlock bindingBlock = block();
 
-		NSMutableArray *signals = [NSMutableArray arrayWithObject:self];
+		NSMutableArray<RACSignal *> *signals = [NSMutableArray arrayWithObject:self];
 
 		RACCompoundDisposable *compoundDisposable = [RACCompoundDisposable compoundDisposable];
 

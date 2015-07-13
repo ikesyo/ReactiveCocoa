@@ -59,7 +59,7 @@
 - (RACSignal *)rac_liftSelector:(SEL)selector withSignals:(RACSignal *)firstSignal, ... {
 	NSCParameterAssert(firstSignal != nil);
 
-	NSMutableArray *signals = [NSMutableArray array];
+	NSMutableArray<RACSignal *> *signals = [NSMutableArray array];
 
 	va_list args;
 	va_start(args, firstSignal);

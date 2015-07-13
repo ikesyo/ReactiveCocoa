@@ -476,7 +476,7 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 }
 
 + (RACSignal *)merge:(id<NSFastEnumeration>)signals {
-	NSMutableArray *copiedSignals = [[NSMutableArray alloc] init];
+	NSMutableArray<RACSignal *> *copiedSignals = [[NSMutableArray alloc] init];
 	for (RACSignal *signal in signals) {
 		[copiedSignals addObject:signal];
 	}
@@ -501,7 +501,7 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 		// Contains disposables for the currently active subscriptions.
 		//
 		// This should only be used while synchronized on `subscriber`.
-		NSMutableArray *activeDisposables = [[NSMutableArray alloc] initWithCapacity:maxConcurrent];
+		NSMutableArray<RACSerialDisposable *> *activeDisposables = [[NSMutableArray alloc] initWithCapacity:maxConcurrent];
 
 		// Whether the signal-of-signals has completed yet.
 		//
@@ -530,7 +530,7 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 		// The signals waiting to be started.
 		//
 		// This array should only be used while synchronized on `subscriber`.
-		NSMutableArray *queuedSignals = [NSMutableArray array];
+		NSMutableArray<RACSignal *> *queuedSignals = [NSMutableArray array];
 
 		recur = subscribeToSignal = ^(RACSignal *signal) {
 			RACSerialDisposable *serialDisposable = [[RACSerialDisposable alloc] init];
@@ -1080,7 +1080,7 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 
 	return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
 		NSMutableDictionary<id<NSCopying>, RACGroupedSignal *> *groups = [NSMutableDictionary dictionary];
-		NSMutableArray *orderedGroups = [NSMutableArray array];
+		NSMutableArray<RACGroupedSignal *> *orderedGroups = [NSMutableArray array];
 
 		return [self subscribeNext:^(id x) {
 			id<NSCopying> key = keyBlock(x);

@@ -57,7 +57,7 @@
 	RACCompoundDisposable *disposable = [RACCompoundDisposable compoundDisposable];
 	subscriber = [[RACPassthroughSubscriber alloc] initWithSubscriber:subscriber signal:self disposable:disposable];
 
-	NSMutableArray *subscribers = self.subscribers;
+	NSMutableArray<id<RACSubscriber>> *subscribers = self.subscribers;
 	@synchronized (subscribers) {
 		[subscribers addObject:subscriber];
 	}

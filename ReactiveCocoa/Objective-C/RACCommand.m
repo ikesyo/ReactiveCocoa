@@ -28,7 +28,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 	// The mutable array backing `activeExecutionSignals`.
 	//
 	// This should only be used while synchronized on `self`.
-	NSMutableArray *_activeExecutionSignals;
+	NSMutableArray<RACSignal *> *_activeExecutionSignals;
 
 	// Atomic backing variable for `allowsConcurrentExecution`.
 	volatile uint32_t _allowsConcurrentExecution;
